@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Compartido</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: #0078d7;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            color: white;
+        }
+
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin: 8px;
+            word-wrap: break-word;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .own {
+            align-self: flex-end;
+            background-color: #34b7f1;
+            text-align: right;
+        }
+
+        .other {
+            align-self: flex-start;
+            background-color: #005c99;
+            text-align: left;
+        }
+
+        .input-container {
+            display: flex;
+            background-color: #004c80;
+            padding: 12px;
+            border-top: 1px solid #003d66;
+        }
+
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .input-container button {
+            background-color: #34b7f1;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .input-container button:hover {
+            background-color: #29a2da;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container" id="chat"></div>
+
+    <div class="input-container">
+        <input type="text" id="mensaje" placeholder="Escribe un mensaje...">
+        <button onclick="enviarMensaje()">Enviar</button>
+    </div>
+
+    <script>
+        const ws = new WebSocket("ws://172.18.32.169:8080/ws/chat");
+        const chat = document.getElementById("chat");
+        const input = document.getElementById("mensaje");
+        const clientId = Math.random().toString(36).substring(2, 8);
+
+        ws.onopen = () => console.log("Conectado al servidor WebSocket");
+
+        ws.onmessage = (event) => {
+            const data = event.data;
+            mostrarMensaje(data, false);
+        };
+
+        function enviarMensaje() {
+            const texto = input.value.trim();
+            if (texto === "") return;
+            const mensaje = `[${clientId}] ${texto}`;
+            ws.send(mensaje);
+            mostrarMensaje(mensaje, true);
+            input.value = "";
+        }
+
+        function mostrarMensaje(mensaje, esPropio) {
+            const div = document.createElement("div");
+            div.classList.add("message");
+            if (esPropio) {
+                div.classList.add("own");
+                div.textContent = mensaje.replace(`[${clientId}] `, "");
+            } else {
+                div.classList.add("other");
+                div.textContent = mensaje.replace(/\[.*?\]\s*/, "");
+            }
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") enviarMensaje();
+        });
+    </script>
+</body>
+</html>

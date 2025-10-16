@@ -3,108 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat Compartido</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: "Segoe UI", sans-serif;
-            background-color: #0078d7;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            color: white;
-        }
-
-        .chat-container {
-            flex: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            padding: 15px;
-        }
-
-        .message {
-            max-width: 70%;
-            padding: 10px 15px;
-            border-radius: 20px;
-            margin: 8px;
-            word-wrap: break-word;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        .own {
-            align-self: flex-end;
-            background-color: #34b7f1;
-            text-align: right;
-        }
-
-        .other {
-            align-self: flex-start;
-            background-color: #005c99;
-            text-align: left;
-        }
-
-        .input-container {
-            display: flex;
-            background-color: #004c80;
-            padding: 12px;
-            border-top: 1px solid #003d66;
-        }
-
-        .input-container input {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 25px;
-            outline: none;
-            font-size: 16px;
-        }
-
-        .input-container button {
-            background-color: #34b7f1;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            margin-left: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .input-container button:hover {
-            background-color: #29a2da;
-        }
-
-        .download-section {
-            background-color: #005c99;
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid #003d66;
-        }
-
-        .download-section h2 {
-            margin: 0 0 10px 0;
-        }
-
-        .download-section button {
-            background-color: #34b7f1;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            margin: 5px;
-            cursor: pointer;
-            color: white;
-            font-weight: bold;
-        }
-
-        .download-section button:hover {
-            background-color: #29a2da;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -112,21 +12,23 @@
     <div class="download-section">
         <h2>Descargar Videos de Prueba</h2>
         <p>Selecciona un video para descargar:</p>
-        <a href="/videos/VideoCorto.mp4" download><button>📹 Corto</button></a>
-        <a href="/videos/VideoMedio.mp4" download><button>🎥 Medio</button></a>
-        <a href="/videos/VideoLargo.mp4" download><button>🎞️ Largo</button></a>
+
+        <img src="video3d.png" alt="icono de video">
+        <div class="button-container">
+        <a href="/videos/VideoCorto.mp4" download>
+            <button >
+                <img src="pelicula.png" alt="cine"> Corto</button></a>
+       
+        <a href="/videos/VideoMedio.mp4" download><button><img src="camara.png" alt="camra"> Medio</button></a>
+        <a href="/videos/VideoLargo.mp4" download><button><img src="cinema.png" alt="cinta"> Largo</button></a>
+        </div>
     </div>
 
     <!-- 💬 Sección del chat -->
-    <div class="chat-container" id="chat"></div>
-
-    <div class="input-container">
-        <input type="text" id="mensaje" placeholder="Escribe un mensaje...">
-        <button onclick="enviarMensaje()">Enviar</button>
-    </div>
-
+    
+    
     <script>
-        const ws = new WebSocket("ws://172.18.32.169:8080/ws/chat");
+      const ws = new WebSocket("ws://192.168.1.10/ws/chat");
         const chat = document.getElementById("chat");
         const input = document.getElementById("mensaje");
         const clientId = Math.random().toString(36).substring(2, 8);
@@ -164,6 +66,8 @@
         input.addEventListener("keypress", (e) => {
             if (e.key === "Enter") enviarMensaje();
         });
+        
+        
     </script>
 </body>
 </html>

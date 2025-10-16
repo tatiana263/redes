@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 
 @RestController
-@RequestMapping("/videos")
+@RequestMapping("/api/files")
 public class VideoController {
 
     @GetMapping("/{nombre}")

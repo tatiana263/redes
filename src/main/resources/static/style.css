@@ -1,0 +1,118 @@
+
+body {
+  background: radial-gradient(circle at top, #2c2c2c, #121212);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.download-section {
+  background: linear-gradient(180deg, rgba(0,118,215,0.7), rgba(0,80,180,0.6));
+  height: 80%;
+  width: 600px;
+  border-radius: 40px;
+  padding: 30px;
+  box-sizing: content-box;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+.download-section img {
+  width: 260px;
+  height: 260px;
+  margin-bottom: 15px;
+  transition: transform 0.4s ease;
+}
+
+.download-section img:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+
+.download-section h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+
+.download-section p {
+  color: #e0e0e0;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+
+.button-container button {
+  display: flex;
+  flex-direction: column;     
+  align-items: center;         
+  justify-content: center;     
+  gap: 8px;                    
+  background-color: transparent;
+  border: 2px solid #00aaff;
+  color: #00aaff;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+
+.button-container button:hover {
+  transform: scale(1.05);
+  background-color: #00aaff;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+}
+
+
+.button-container button:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+
+.button-container button img {
+  width: 80px;
+  height: 80px;
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.download-section {
+  animation: fadeInUp 0.8s ease forwards;
+}

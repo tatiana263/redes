@@ -74,6 +74,32 @@
             background-color: #29a2da;
         }
 
+        .download-section {
+            background-color: #005c99;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #003d66;
+        }
+
+        .download-section h2 {
+            margin: 0 0 10px 0;
+        }
+
+        .download-section button {
+            background-color: #34b7f1;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 5px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
+
+        .download-section button:hover {
+            background-color: #29a2da;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -82,6 +108,16 @@
 </head>
 <body>
 
+    <!-- 🔽 Nueva sección de descargas -->
+    <div class="download-section">
+        <h2>Descargar Videos de Prueba</h2>
+        <p>Selecciona un video para descargar:</p>
+        <a href="/videos/VideoCorto.mp4" download><button>📹 Corto</button></a>
+        <a href="/videos/VideoMedio.mp4" download><button>🎥 Medio</button></a>
+        <a href="/videos/VideoLargo.mp4" download><button>🎞️ Largo</button></a>
+    </div>
+
+    <!-- 💬 Sección del chat -->
     <div class="chat-container" id="chat"></div>
 
     <div class="input-container">
